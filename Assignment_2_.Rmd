@@ -4,22 +4,59 @@ author: "Theresa Igweike"
 date: "2025-08-23"
 output: html_document
 ---
+# R Wikipedia Scraping
+
+### Import library and data
 
 ```{r}
 library(rvest)
 ```
 
-
 ```{r}
+#load the web page
 web_file <- read_html("https://en.wikipedia.org/w/index.php?title=Comma-separated_values&oldid=1278844710")
 print(web_file)
 ```
 
 ```{r}
+#load the html table
 file_table <- web_file %>% html_nodes(xpath = '//h2[contains(., "Example")]//following::pre') %>% html_text()
 ```
 
 ```{r}
+#find the correct table
+file_table[1]
+```
 
+```{r}
+data_table <- file_table[1]
+```
+
+```{r}
+#Create the excel data file
+write.table(data_table, file = "vehicle.csv", quote = FALSE, col.names = FALSE, row.names = FALSE)
+```
+
+### Analysis with data file
+
+```{r}
+info <- read.csv("vehicle.csv")
+info
+```
+
+```{r}
+summary(info)
+```
+
+```{r}
+table(info$Year)
+```
+
+```{r}
+max(info$Price)
+```
+
+```{r}
+min(info$Price)
 ```
 
