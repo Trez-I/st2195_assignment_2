@@ -1,0 +1,25 @@
+---
+title: "Assignment 2"
+author: "Theresa Igweike"
+date: "2025-08-23"
+output: html_document
+---
+
+```{r}
+library(rvest)
+```
+
+
+```{r}
+web_file <- read_html("https://en.wikipedia.org/w/index.php?title=Comma-separated_values&oldid=1278844710")
+print(web_file)
+```
+
+```{r}
+file_table <- web_file %>% html_nodes(xpath = '//h2[contains(., "Example")]//following::pre') %>% html_text()
+```
+
+```{r}
+
+```
+
